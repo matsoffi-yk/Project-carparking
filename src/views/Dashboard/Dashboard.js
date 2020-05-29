@@ -64,7 +64,7 @@ const Dashboard = () => {
   })
 
   console.log('cars: ', cars)
-  console.log('dashboard: ', dashboard[0])
+  console.log('dashboard: ', moment(dashboard[0].newDate).format()) //ดึงเวลาให้ใช้แบบนี้
   console.log('realtime: ', realtime)
   console.log('graph: ', graph)
 
