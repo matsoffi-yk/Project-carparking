@@ -1,0 +1,60 @@
+#card {
+    border-radius: 20px;
+    width: 300px;
+    height: 150px;
+    margin-left: 20px;
+
+}
+.number{
+    padding-left: 210px;
+}
+
+.textcard1 {
+    padding-left: 90px;
+}
+
+.textcard2 {
+    padding-left: 100px;
+}
+
+.textcard3 {
+    padding-left: 75px;
+}
+
+.textcard4 {
+    padding-left: 140px;
+}
+
+.logo1 {
+    width: 70px;
+    height: 50px;
+}
+
+.logo2 {
+    width: 70px;
+    height: 50px;
+}
+
+.logo3 {
+    width: 70px;
+    height: 58px;
+}
+.logo4 {
+    width: 50px;
+    height: 50px;
+}
+
+.absolute{
+    position: absolute;
+    width: 170px;
+    height: 145px;
+    opacity: 0.1;
+   
+}
+/* 
+@media (min-width: 576px){
+   .media{
+       margin-left: 1px;
+   }
+ 
+} */
