@@ -34,13 +34,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 
 var moment = require("moment"); // require
 const time = moment().format("DD MMMM YYYY");
-//statisce
-const data1 = [
-  { name: "A", number: 1, time: 10.1 },
-  { name: "B", number: 1.2, time: 10.3 },
-  { name: "C", number: 1.3, time: 10.6 },
-  { name: "D", number: 3, time: 10.5 },
-];
+
 
 //realtime
 const data2 = [
@@ -111,22 +105,70 @@ const Dashboard = () => {
     console.log("test1", newData);
 
   })
-
-
-  const renderRealtime = () => {
-    realtime.sort((a, b) => new moment(a.time) - new moment(b.time))
-    return realtime.map((v) => {
-      return (
-        <div>
-          <Row className="row">
-            <Col>{v.id}</Col>
-            <Col>{v.numberOfcars}</Col>
-            <Col>{moment(v.time).format('hh:mm:ss')}</Col>
-          </Row>
-        </div>
-      )
-    })
+  const [task, setTask] = useState(realtime.map(realtime => (
+    <TableRow
+      hover
+      key={realtime.id}
+    >
+      <TableCell>{realtime.numberOfcars}</TableCell>
+      <TableCell>{realtime.numberOfcars}</TableCell>
+      <TableCell>
+        {moment(realtime.time).format('hh:mm:ss')}
+      </TableCell>
+    </TableRow>
+  )))
+  const viewAll = () => {
+    if (task === realtime.map(realtime => (
+      <TableRow
+        hover
+        key={realtime.id}
+      >
+        <TableCell>{realtime.numberOfcars}</TableCell>
+        <TableCell>{realtime.numberOfcars}</TableCell>
+        <TableCell>
+          {moment(realtime.time).format('hh:mm:ss')}
+        </TableCell>
+      </TableRow>
+    ))) {
+      return setTask(realtime.slice(0, 4).map(realtime => (
+        <TableRow
+          hover
+          key={realtime.id}
+        >
+          <TableCell>{realtime.numberOfcars}</TableCell>
+          <TableCell>{realtime.numberOfcars}</TableCell>
+          <TableCell>
+            {moment(realtime.time).format('hh:mm:ss')}
+          </TableCell>
+        </TableRow>
+      )))
+    } else {
+      return setTask(realtime.map(realtime => (
+        <TableRow
+          hover
+          key={realtime.id}
+        >
+          <TableCell>{realtime.numberOfcars}</TableCell>
+          <TableCell>{realtime.numberOfcars}</TableCell>
+          <TableCell>
+            {moment(realtime.time).format('hh:mm:ss')}
+          </TableCell>
+        </TableRow>
+      )))
+    }
   }
+  console.log(realtime.slice(0, 4).map(realtime => (
+    <TableRow
+      hover
+      key={realtime.id}
+    >
+      <TableCell>{realtime.numberOfcars}</TableCell>
+      <TableCell>{realtime.numberOfcars}</TableCell>
+      <TableCell>
+        {moment(realtime.time).format('hh:mm:ss')}
+      </TableCell>
+    </TableRow>
+  )))
   return (
     <div className="animated fadeIn">
       {/* //การ์ด */}
@@ -191,8 +233,6 @@ const Dashboard = () => {
                 <Statistic value={data.length} className="satistic" />
                 <div className="price">
                   <img src={price} className="price" />
-                  <text>{data1[1].number}</text>
-                  <text>({data1[2].number})</text>
                 </div>
                 <LineChart width={900} height={200} data={datagraph}>
                   <Line dataKey="number" stroke="#8884d8" />
@@ -283,44 +323,12 @@ const Dashboard = () => {
                 </Pie>
               </PieChart>
             </CardBody>
-            {renderRealtime()}
             <CardContent>
               <PerfectScrollbar>
                 <div >
                   <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Order Ref</TableCell>
-                        <TableCell>Customer</TableCell>
-                        <TableCell sortDirection="desc">
-                          <Tooltip
-                            enterDelay={300}
-                            title="Sort"
-                          >
-                            <TableSortLabel
-                              active
-                              direction="desc"
-                            >
-                              Date
-                      </TableSortLabel>
-                          </Tooltip>
-                        </TableCell>
-                        <TableCell>Status</TableCell>
-                      </TableRow>
-                    </TableHead>
                     <TableBody>
-                      {realtime.map(realtime => (
-                        <TableRow
-                          hover
-                          key={realtime.id}
-                        >
-                          <TableCell>{realtime.numberOfcars}</TableCell>
-                          <TableCell>{realtime.numberOfcars}</TableCell>
-                          <TableCell>
-                            {moment(realtime.newDate).format('DD/MM/YYYY')}
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                      {task}
                     </TableBody>
                   </Table>
                 </div>
@@ -332,6 +340,7 @@ const Dashboard = () => {
                 color="primary"
                 size="small"
                 variant="text"
+                onClick={viewAll}
               >
                 View all <ArrowRightIcon />
               </Button>
